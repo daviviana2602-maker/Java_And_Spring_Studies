@@ -1,0 +1,163 @@
+==================== Tipos de Request ====================
+
+@GetMapping
+@PostMapping
+@PutMapping
+@DeleteMapping
+@PatchMapping
+
+GET → buscar dados
+POST → criar dados
+PUT → atualizar tudo
+PATCH → atualizar parte
+DELETE → deletar
+
+
+
+==================== TIPOS DE PARÂMETROS (ESSENCIAIS) ====================
+
+
+
+import org.springframework.web.bind.annotation.*;
+
+
+@RestController   // diz que é uma API REST (retorna JSON/texto direto)
+@RequestMapping("/v1/hello")    // prefix com versão
+
+
+public class HelloController {
+
+
+    @GetMapping("/{id}")
+    public String pegarId(@PathVariable("id") String id) {    // pega o param id e coloca na variável id
+        return "Hello World " + id;
+    }
+
+
+    @GetMapping("/name")
+    public String pegarNome(@RequestParam(value = "name", required = false) String name) {    // nome é obrigatório por default
+        return "fala " + name;
+    }
+
+
+    @PostMapping("/criar")
+    public String createUser(@RequestBody String user){    // recebe dados JSON do corpo da requisição e transforma em User
+        return "createUser: " + user;
+    }
+
+}
+
+
+
+
+==================== Exemplo completo ====================
+
+
+@RestController
+@RequestMapping("/api/users")
+public class UserController {
+
+    (simula banco em memória)
+    private List<User> users = new ArrayList<>();
+
+
+
+==================== GET (buscar todos) ====================
+
+    @GetMapping
+    public List<User> getAllUsers() {
+        return users;
+    }
+
+
+
+==================== GET (buscar por id) ====================
+
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable int id) {
+
+        for (User u : users) {
+            if (u.id == id) {
+                return u;
+            }
+        }
+
+        return "User not found";
+    }
+
+
+
+==================== POST (criar usuário) ====================
+
+    @PostMapping
+    public String createUser(@RequestBody User user) {
+
+        users.add(user);
+
+        return "User created: " + user.name;
+    }
+
+
+
+==================== PUT (atualizar tudo) ====================
+
+    @PutMapping("/{id}")
+    public String updateUser(@PathVariable int id, @RequestBody User newUser) {
+
+        for (User u : users) {
+            if (u.id == id) {
+                u.name = newUser.name;
+                u.age = newUser.age;
+                return "User updated fully";
+            }
+        }
+
+        return "User not found";
+    }
+
+
+
+==================== PATCH (atualizar parcial) ====================
+
+    @PatchMapping("/{id}")
+    public String patchUser(@PathVariable int id, @RequestBody User partialUser) {
+
+        for (User u : users) {
+            if (u.id == id) {
+
+                if (partialUser.name != null) {
+                    u.name = partialUser.name;
+                }
+
+                if (partialUser.age != 0) {
+                    u.age = partialUser.age;
+                }
+
+                return "User patched";
+            }
+        }
+
+        return "User not found";
+    }
+
+
+
+==================== DELETE (remover) ====================
+
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable int id) {
+
+        Iterator<User> it = users.iterator();
+
+        while (it.hasNext()) {
+            User u = it.next();
+
+            if (u.id == id) {
+                it.remove();
+                return "User deleted";
+            }
+        }
+
+        return "User not found";
+    }
+}

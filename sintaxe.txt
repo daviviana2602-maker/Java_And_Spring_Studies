@@ -1,0 +1,102 @@
+==================== Tipos ====================
+
+String nome = "Davi";
+
+int idade = 18;
+
+boolean ativo = true;
+
+double saldo = 99.90;
+
+
+
+==================== Condicionais ====================
+
+if (idade >= 18) {
+    System.out.println("Maior");
+} else {
+    System.out.println("Menor");
+}
+
+
+
+==================== For I in range ====================
+
+for (int i = 0; i < 5; i++) {
+    System.out.println(i);
+}
+
+1. int i = 0  -> começa em 0
+2. i < 5      -> condição
+3. i++        -> soma 1 a cada volta
+
+
+
+==================== foreach ====================
+
+List<String> nomes = new ArrayList<>();
+
+nomes.add("Davi");
+nomes.add("Pedro");
+
+for (String n : nomes) {
+    System.out.println(n);
+}
+
+
+
+==================== Função ====================
+
+public static String saudacao(String nome) {
+    return "Olá " + nome;
+}
+
+
+
+==================== Listas ====================
+
+List<String> nomes = new ArrayList<>();
+
+nomes.add("Davi");
+
+nomes.remove("Davi");
+
+System.out.println(nomes.size());
+
+
+
+==================== While ====================
+
+int i = 0;
+
+while (i < 5) {
+    System.out.println(i);
+    i++;
+}
+
+
+
+==================== Criar Objeto ====================
+
+Pessoa pessoa = new Pessoa();
+
+pessoa.nome = "Davi";
+
+
+
+==================== BigDecimal ====================
+
+
+   if (preco.compareTo(BigDecimal.valueOf(5000)) > 0)   se maior que 5000
+
+   if (preco.compareTo(BigDecimal.valueOf(5000)) >= 0)   se igual ou maior que 5000
+
+   if (preco.compareTo(BigDecimal.valueOf(5000)) < 0)   se menor que 5000
+
+   if (preco.compareTo(BigDecimal.ZERO) <= 0)   se menor que 0
+
+
+BigDecimal.ZERO   
+BigDecimal.ONE    
+BigDecimal.TEN    
+BigDecimal.ONE_HUNDRED 
