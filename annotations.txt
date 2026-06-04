@@ -1,0 +1,17 @@
+🔵 Annotations automáticas
+
+@Service, @Controller, @Repository, @Entity @Configuration
+
+“eu achei essa classe, vou criar ela sozinho”
+
+Spring faz tudo automaticamente via scan
+
+
+
+🟠 @Bean
+
+@Bean dentro de uma classe @Configuration
+
+“eu estou criando manualmente um objeto e entregando ele para o Spring somente gerenciar”
+
+Você cria o objeto manualmente e entrega pro Spring
